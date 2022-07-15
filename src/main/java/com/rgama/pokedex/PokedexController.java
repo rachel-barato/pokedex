@@ -3,6 +3,7 @@ package com.rgama.pokedex;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,49 +14,47 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping(path="/pokedex")
 public class PokedexController {
-
-	@Autowired
-	private PokemonRepository pokemonRepository;
 	
 	@Autowired
-	private EspecieRepository especieRepository;
+	private PokedexService<?> pokedexService;
 	
-	@Autowired
-	private SkillRepository skillRepository;
-	
-	PokedexController(PokemonRepository repository) {
-		this.pokemonRepository = repository;
+	PokedexController(PokedexService<?> pokedexService) {
+		this.pokedexService = pokedexService;
 	}
 
 	
 	@GetMapping(path="/especies")
 	public @ResponseBody List<Especie> getAllEspecies() {
-		return especieRepository.findAll();
+		return pokedexService.getAllEspecies();
 	}
 	
 	@GetMapping(path="/especies/{nome}")
-	public @ResponseBody Especie getEspecieByName(@PathVariable String nome) {
-		return especieRepository.findByEspecie(nome);
+	public @ResponseBody ResponseEntity<Especie> getEspecieByName(@PathVariable String nome) {
+		return pokedexService.getEspecieByName(nome);
+	}
+	
+	@DeleteMapping(path="/especies/{id}")
+	public @ResponseBody void deleteEspecie(Integer id) {
+		
 	}
 	
 	@GetMapping(path="/pokemons")
 	public @ResponseBody List<Pokemon> getAllPokemons() {
-		return pokemonRepository.findAll();
+		return pokedexService.getAllPokemons();
 	}
 	
 	@GetMapping(path="/pokemons/{id}")
 	public @ResponseBody Pokemon getPokemonById(@PathVariable Integer id) {
-		return pokemonRepository.findById(id)
-				.orElseThrow(() -> new PokemonNotFoundException(id));
+		return pokedexService.getPokemonById(id);
 	}
 	
 	@DeleteMapping(path="/pokemons/{id}")
 	public void deletePokemon(@PathVariable Integer id) {
-		pokemonRepository.deleteById(id);
+		pokedexService.deletePokemon(id);
 	}
 	
 	@GetMapping(path="/skills")
 	public @ResponseBody List<Skill> getAllSkills() {
-		return skillRepository.findAll();
+		return pokedexService.getAllSkills();
 	}
 }

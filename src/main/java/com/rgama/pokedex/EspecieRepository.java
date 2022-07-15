@@ -9,5 +9,7 @@ public interface EspecieRepository extends JpaRepository<Especie, Integer> {
 	List<Especie> findAll();
 	
 	Especie findByEspecie(String nome);
+	
+	List<Especie> findByOrderByEspecieAsc();
 
 }
