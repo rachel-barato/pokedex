@@ -1,6 +1,7 @@
 package com.rgama.pokedex;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -11,6 +12,6 @@ public interface TipoDePokemonRepository extends JpaRepository<TipoDePokemon, In
 	
 	List<TipoDePokemon> findAll();
 	
-	TipoDePokemon findById();
+	Optional<TipoDePokemon> findById(Integer id);
 
 }

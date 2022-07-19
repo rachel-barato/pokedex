@@ -8,9 +8,11 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
@@ -24,8 +26,8 @@ public class PokedexController {
 		this.pokedexService = pokedexService;
 	}
 
-	
-	@PutMapping(path="/especies")
+	@RequestMapping(value = "/especies", method = RequestMethod.POST, produces="application/json",  consumes="application/json")
+	@PostMapping(path="/especies")
 	public @ResponseBody ResponseEntity<Especie> createNewEspecie(@RequestBody Especie newEspecie) {
 		return pokedexService.createNewEspecie(newEspecie);
 	}
@@ -45,7 +47,7 @@ public class PokedexController {
 		return pokedexService.deleteEspecie(id);
 	}
 	
-	@PutMapping(path="/pokemons")
+	@PostMapping(path="/pokemons")
 	public @ResponseBody ResponseEntity<Pokemon> createNewPokemon(@RequestBody Pokemon newPokemon) {
 		return pokedexService.createNewPokemon(newPokemon);
 	}
@@ -65,7 +67,7 @@ public class PokedexController {
 		return pokedexService.getPokemonById(id);
 	}
 	
-	@PutMapping(path="/skills")
+	@PostMapping(path="/skills")
 	public @ResponseBody ResponseEntity<Skill> createNewSkill(@RequestBody Skill newSkill) {
 		return pokedexService.createNewSkill(newSkill);
 	}
@@ -85,7 +87,7 @@ public class PokedexController {
 		return pokedexService.getSkillById(id);
 	}
 	
-	@PutMapping(path="/tipos")
+	@PostMapping(path="/tipos")
 	public @ResponseBody ResponseEntity<TipoDePokemon> createNewTipoDePokemon(@RequestBody TipoDePokemon newTipo) {
 		return pokedexService.createNewTipo(newTipo);
 	}
