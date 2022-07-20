@@ -76,7 +76,7 @@ public class PokedexController {
 		return pokedexService.getAllSpecies();
 	}
 	
-	@GetMapping(path="/species/{nome}")
+	@GetMapping(path="/species/{name}")
 	public @ResponseBody Species getSpeciesByName(@PathVariable String name) {
 		return pokedexService.getSpeciesByName(name);
 	}
