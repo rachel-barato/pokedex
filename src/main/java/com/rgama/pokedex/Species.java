@@ -19,8 +19,8 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-@Table(name="especie")
-public class Especie implements Serializable {
+@Table(name="species")
+public class Species implements Serializable {
 
 	private static final long serialVersionUID = 7583907356380345346L;
 
@@ -29,10 +29,10 @@ public class Especie implements Serializable {
 	@Column(name="ID")
 	private Integer id;
 	
-	@Column(name="especie")
-	private String especie;
+	@Column(name="name")
+	private String name;
 	
-	@OneToMany(mappedBy="especie")
+	@OneToMany(mappedBy="species")
 	@JsonIdentityInfo(
 			  generator = ObjectIdGenerators.PropertyGenerator.class, 
 			  property = "id")
@@ -40,16 +40,16 @@ public class Especie implements Serializable {
 	
 	@ManyToMany
 	@JoinTable(name="tipos_de_especies",
-				joinColumns= @JoinColumn(name="id_especie"),
+				joinColumns= @JoinColumn(name="id_species"),
 				inverseJoinColumns=@JoinColumn(name="id_tipo"))
 	@JsonManagedReference
 	private List<TipoDePokemon> tipos;
 
-	public Especie() {
+	public Species() {
 	}
 
-	public Especie(String especie, List<TipoDePokemon> tipos) {
-		this.especie = especie;
+	public Species(String name, List<TipoDePokemon> tipos) {
+		this.name = name;
 		this.tipos = tipos;
 	}
 
@@ -61,12 +61,12 @@ public class Especie implements Serializable {
 		this.id = id;
 	}
 
-	public String getEspecie() {
-		return especie;
+	public String getName() {
+		return name;
 	}
 
-	public void setEspecie(String especie) {
-		this.especie = especie;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public List<TipoDePokemon> getTipos() {

@@ -28,11 +28,11 @@ public class Pokemon implements Serializable {
 	private Integer ID;
 	
 	@ManyToOne
-	@JoinColumn(name="ID_especie", nullable=false)
+	@JoinColumn(name="ID_species", nullable=false)
 	@JsonIdentityInfo(
 			  generator = ObjectIdGenerators.PropertyGenerator.class, 
 			  property = "id")
-	private Especie especie;
+	private Species species;
 	
 	@Column(name="nome")
 	private String nome;
@@ -58,18 +58,18 @@ public class Pokemon implements Serializable {
 	public Pokemon() {
 	}
 
-	public Pokemon(Especie especie) {
-		this.especie = especie;
+	public Pokemon(Species species) {
+		this.species = species;
 	}
 
 	public Pokemon(
-			Integer iD, Especie especie, 
+			Integer iD, Species species, 
 			String nome, Double peso, 
 			Integer idade, Double ataque,
 			Double defesa, String genero
 	) {
 		ID = iD;
-		this.especie = especie;
+		this.species = species;
 		this.nome = nome;
 		this.peso = peso;
 		this.idade = idade;
@@ -86,12 +86,12 @@ public class Pokemon implements Serializable {
 		ID = iD;
 	}
 
-	public Especie getEspecie() {
-		return especie;
+	public Species getSpecies() {
+		return species;
 	}
 
-	public void setEspecie(Especie especie) {
-		this.especie = especie;
+	public void setSpecies(Species species) {
+		this.species = species;
 	}
 
 	public String getName() {

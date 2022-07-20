@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -24,27 +23,6 @@ public class PokedexController {
 	
 	PokedexController(PokedexService pokedexService) {
 		this.pokedexService = pokedexService;
-	}
-
-	@RequestMapping(value = "/especies", method = RequestMethod.POST, produces="application/json",  consumes="application/json")
-	@PostMapping(path="/especies")
-	public @ResponseBody ResponseEntity<Especie> createNewEspecie(@RequestBody Especie newEspecie) {
-		return pokedexService.createNewEspecie(newEspecie);
-	}
-	
-	@GetMapping(path="/especies")
-	public @ResponseBody List<Especie> getAllEspecies() {
-		return pokedexService.getAllEspecies();
-	}
-	
-	@GetMapping(path="/especies/{nome}")
-	public @ResponseBody Especie getEspecieByName(@PathVariable String nome) {
-		return pokedexService.getEspecieByName(nome);
-	}
-	
-	@DeleteMapping(path="/especies/{id}")
-	public @ResponseBody ResponseEntity<String> deleteEspecie(Integer id) {
-		return pokedexService.deleteEspecie(id);
 	}
 	
 	@PostMapping(path="/pokemons")
@@ -85,6 +63,27 @@ public class PokedexController {
 	@GetMapping(path="/skills/{id}")
 	public @ResponseBody Skill getSkillById(@PathVariable Integer id) {
 		return pokedexService.getSkillById(id);
+	}
+
+	@RequestMapping(value = "/species", method = RequestMethod.POST, produces="application/json",  consumes="application/json")
+	@PostMapping(path="/species")
+	public @ResponseBody ResponseEntity<Species> createNewSpecies(@RequestBody Species newSpecies) {
+		return pokedexService.createNewSpecies(newSpecies);
+	}
+	
+	@GetMapping(path="/species")
+	public @ResponseBody List<Species> getAllSpecies() {
+		return pokedexService.getAllSpecies();
+	}
+	
+	@GetMapping(path="/species/{nome}")
+	public @ResponseBody Species getSpeciesByName(@PathVariable String name) {
+		return pokedexService.getSpeciesByName(name);
+	}
+	
+	@DeleteMapping(path="/species/{id}")
+	public @ResponseBody ResponseEntity<String> deleteSpecies(Integer id) {
+		return pokedexService.deleteSpecies(id);
 	}
 	
 	@PostMapping(path="/tipos")

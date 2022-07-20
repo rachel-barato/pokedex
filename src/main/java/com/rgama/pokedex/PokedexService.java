@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 public class PokedexService {
 	
 	@Autowired
-	private EspecieRepository especieRepository;
+	private SpeciesRepository speciesRepository;
 	
 	@Autowired
 	private PokemonRepository pokemonRepository;
@@ -22,26 +22,6 @@ public class PokedexService {
 	
 	@Autowired
 	private TipoDePokemonRepository tipoDePokemonRepository;
-
-	
-	public ResponseEntity<Especie> createNewEspecie(Especie newEspecie) {
-		return ResponseEntity.ok(especieRepository.save(newEspecie));
-	}
-	
-	public List<Especie> getAllEspecies() {
-		return especieRepository.findByOrderByEspecieAsc();
-	}
-	
-	public Especie getEspecieByName(String nome) {
-		Optional<Especie> especieFound = Optional.of(especieRepository.findByEspecie(nome));
-		
-		return especieFound.orElseThrow(() -> new EntityNotFoundException("especie", nome));
-	}
-	
-	public ResponseEntity<String> deleteEspecie(Integer id) {
-		especieRepository.deleteById(id);
-		return new ResponseEntity<>(HttpStatus.OK);
-	}
 	
 	public ResponseEntity<Pokemon> createNewPokemon(Pokemon newPokemon) {
 		return  ResponseEntity.ok(pokemonRepository.save(newPokemon));
@@ -77,6 +57,25 @@ public class PokedexService {
 	public Skill getSkillById(Integer id) {
 		return skillRepository.findById(id)
 				.orElseThrow(() -> new EntityNotFoundException("skill", id));
+	}	
+	
+	public ResponseEntity<Species> createNewSpecies(Species newSpecies) {
+		return ResponseEntity.ok(speciesRepository.save(newSpecies));
+	}
+	
+	public List<Species> getAllSpecies() {
+		return speciesRepository.findByOrderByNameAsc();
+	}
+	
+	public Species getSpeciesByName(String name) {
+		Optional<Species> speciesFound = Optional.of(speciesRepository.findBySpecies(name));
+		
+		return speciesFound.orElseThrow(() -> new EntityNotFoundException("species", name));
+	}
+	
+	public ResponseEntity<String> deleteSpecies(Integer id) {
+		speciesRepository.deleteById(id);
+		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	public ResponseEntity<TipoDePokemon> createNewTipo(TipoDePokemon newTipo) {

@@ -34,14 +34,14 @@ public class TipoDePokemon implements Serializable {
 			  generator = ObjectIdGenerators.PropertyGenerator.class, 
 			  property = "id")
 	@JsonBackReference
-	private List<Especie> especies;
+	private List<Species> species;
 
 	public TipoDePokemon() {
 	}
 
-	public TipoDePokemon(String tipo, List<Especie> especies) {
+	public TipoDePokemon(String tipo, List<Species> species) {
 		this.tipo = tipo;
-		this.especies = especies;
+		this.species = species;
 	}
 
 	public Integer getId() {
@@ -60,11 +60,11 @@ public class TipoDePokemon implements Serializable {
 		this.tipo = tipo;
 	}
 
-	public List<Especie> getEspecies() {
-		return especies;
+	public List<Species> getSpecies() {
+		return species;
 	}
 
-	public void setEspecies(List<Especie> especies) {
-		this.especies = especies;
+	public void setSpecies(List<Species> species) {
+		this.species = species;
 	}
 }
