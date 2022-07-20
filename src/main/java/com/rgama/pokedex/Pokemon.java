@@ -14,6 +14,7 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
@@ -24,35 +25,36 @@ public class Pokemon implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="ID")
-	private Integer ID;
+	@Column(name="id")
+	private Integer id;
 	
 	@ManyToOne
-	@JoinColumn(name="ID_species", nullable=false)
+	@JoinColumn(name="id_species", nullable=false)
 	@JsonIdentityInfo(
 			  generator = ObjectIdGenerators.PropertyGenerator.class, 
 			  property = "id")
 	private Species species;
 	
-	@Column(name="nome")
-	private String nome;
+	@Column(name="name")
+	private String name;
 	
-	@Column(name="peso")
-	private Double peso;
+	@Column(name="weight")
+	private Double weight;
 	
-	@Column(name="idade")
-	private Integer idade;
+	@Column(name="age")
+	private Integer age;
 	
-	@Column(name="ataque")
-	private Double ataque;
+	@Column(name="attack")
+	private Double attack;
 	
-	@Column(name="defesa")
-	private Double defesa;
+	@Column(name="defense")
+	private Double defense;
 	
-	@Column(name="genero")
-	private String genero;
+	@Column(name="gender")
+	private String gender;
 	
 	@ManyToMany(mappedBy="pokemons")
+	@JsonManagedReference
 	private List<Skill> skills;
 
 	public Pokemon() {
@@ -62,28 +64,24 @@ public class Pokemon implements Serializable {
 		this.species = species;
 	}
 
-	public Pokemon(
-			Integer iD, Species species, 
-			String nome, Double peso, 
-			Integer idade, Double ataque,
-			Double defesa, String genero
-	) {
-		ID = iD;
+	public Pokemon(Species species, String name, Double weight, Integer age, Double attack, Double defense,
+			String gender, List<Skill> skills) {
 		this.species = species;
-		this.nome = nome;
-		this.peso = peso;
-		this.idade = idade;
-		this.ataque = ataque;
-		this.defesa = defesa;
-		this.genero = genero;
+		this.name = name;
+		this.weight = weight;
+		this.age = age;
+		this.attack = attack;
+		this.defense = defense;
+		this.gender = gender;
+		this.skills = skills;
 	}
 
-	public Integer getID() {
-		return ID; 
+	public Integer getId() {
+		return id;
 	}
 
-	public void setID(Integer iD) {
-		ID = iD;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	public Species getSpecies() {
@@ -95,51 +93,58 @@ public class Pokemon implements Serializable {
 	}
 
 	public String getName() {
-		return nome;
+		return name;
 	}
 
-	public void setName(String nome) {
-		this.nome = nome;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public Double getPeso() {
-		return peso;
+	public Double getWeight() {
+		return weight;
 	}
 
-	public void setPeso(Double peso) {
-		this.peso = peso;
+	public void setWeight(Double weight) {
+		this.weight = weight;
 	}
 
-	public Integer getIdade() {
-		return idade;
+	public Integer getAge() {
+		return age;
 	}
 
-	public void setIdade(Integer idade) {
-		this.idade = idade;
+	public void setAge(Integer age) {
+		this.age = age;
 	}
 
-	public Double getAtaque() {
-		return ataque;
+	public Double getAttack() {
+		return attack;
 	}
 
-	public void setAtaque(Double ataque) {
-		this.ataque = ataque;
+	public void setAttack(Double attack) {
+		this.attack = attack;
 	}
 
-	public Double getDefesa() {
-		return defesa;
+	public Double getDefense() {
+		return defense;
 	}
 
-	public void setDefesa(Double defesa) {
-		this.defesa = defesa;
+	public void setDefense(Double defense) {
+		this.defense = defense;
 	}
 
-	public String getGenero() {
-		return genero;
+	public String getGender() {
+		return gender;
 	}
 
-	public void setGenero(String genero) {
-		this.genero = genero;
+	public void setGender(String gender) {
+		this.gender = gender;
 	}
-	
+
+	public List<Skill> getSkills() {
+		return skills;
+	}
+
+	public void setSkills(List<Skill> skills) {
+		this.skills = skills;
+	}
 }

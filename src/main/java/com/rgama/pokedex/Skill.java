@@ -13,6 +13,7 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
@@ -27,26 +28,27 @@ public class Skill implements Serializable {
 	@Column(name="ID")
 	private Integer ID;
 	
-	@Column(name="nome")
-	private String nome;
+	@Column(name="name")
+	private String name;
 	
 	@Column(name="effect")
 	private String effect;
 	
 	@ManyToMany
-	@JoinTable(name="skills_de_pokemon",
+	@JoinTable(name="pokemon_skills",
 				joinColumns= @JoinColumn(name="id_skill"),
 				inverseJoinColumns=@JoinColumn(name="id_pokemon"))
 	@JsonIdentityInfo(
 			  generator = ObjectIdGenerators.PropertyGenerator.class, 
 			  property = "id")
+	@JsonBackReference
 	private List<Pokemon> pokemons;
 
 	public Skill() {
 	}
 
 	public Skill(String name, String effect, List<Pokemon> pokemons) {
-		this.nome = name;
+		this.name = name;
 		this.effect = effect;
 		this.pokemons = pokemons;
 	}
@@ -60,11 +62,11 @@ public class Skill implements Serializable {
 	}
 
 	public String getName() {
-		return nome;
+		return name;
 	}
 
 	public void setName(String name) {
-		this.nome = name;
+		this.name = name;
 	}
 
 	public String getEffect() {
