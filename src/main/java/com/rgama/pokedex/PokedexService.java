@@ -78,16 +78,16 @@ public class PokedexService {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
-	public ResponseEntity<PokemonType> createNewTipo(PokemonType newTipo) {
-		return ResponseEntity.ok(tipoDePokemonRepository.save(newTipo));
+	public ResponseEntity<PokemonType> createNewPokemonType(PokemonType newType) {
+		return ResponseEntity.ok(tipoDePokemonRepository.save(newType));
 	}
 	
-	public ResponseEntity<String> deleteTipoDePokemon(Integer id) {
+	public ResponseEntity<String> deletePokemonType(Integer id) {
 		tipoDePokemonRepository.deleteById(id);
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
-	public List<PokemonType> getAllTiposDePokemon() {
+	public List<PokemonType> getAllPokemonTypes() {
 		return tipoDePokemonRepository.findByOrderByNameAsc();
 	}
 	

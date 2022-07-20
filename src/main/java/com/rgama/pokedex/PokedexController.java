@@ -86,19 +86,19 @@ public class PokedexController {
 		return pokedexService.deleteSpecies(id);
 	}
 	
-	@PostMapping(path="/tipos")
-	public @ResponseBody ResponseEntity<PokemonType> createNewTipoDePokemon(@RequestBody PokemonType newTipo) {
-		return pokedexService.createNewTipo(newTipo);
+	@PostMapping(path="/types")
+	public @ResponseBody ResponseEntity<PokemonType> createNewPokemonType(@RequestBody PokemonType newType) {
+		return pokedexService.createNewPokemonType(newType);
 	}
 	
-	@GetMapping(path="/tipos")
-	public @ResponseBody List<PokemonType> getAllTiposDePokemon() {
-		return pokedexService.getAllTiposDePokemon();
+	@GetMapping(path="/types")
+	public @ResponseBody List<PokemonType> getAllPokemonTypes() {
+		return pokedexService.getAllPokemonTypes();
 	}
 	
-	@DeleteMapping(path="/tipos/{id}")
-	public @ResponseBody ResponseEntity<String> deleteTipoDePokemon(@PathVariable Integer id) {
-		return pokedexService.deleteTipoDePokemon(id);
+	@DeleteMapping(path="/types/{id}")
+	public @ResponseBody ResponseEntity<String> deletePokemonType(@PathVariable Integer id) {
+		return pokedexService.deletePokemonType(id);
 	}
 	
 	@GetMapping(path="/tipos/{id}")
