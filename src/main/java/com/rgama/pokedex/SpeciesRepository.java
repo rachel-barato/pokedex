@@ -8,7 +8,7 @@ public interface SpeciesRepository extends JpaRepository<Species, Integer> {
 	
 	List<Species> findAll();
 	
-	Species findBySpecies(String nome);
+	Species findByName(String name);
 	
 	List<Species> findByOrderByNameAsc();
 

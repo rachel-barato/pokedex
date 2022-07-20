@@ -87,12 +87,12 @@ public class PokedexController {
 	}
 	
 	@PostMapping(path="/tipos")
-	public @ResponseBody ResponseEntity<TipoDePokemon> createNewTipoDePokemon(@RequestBody TipoDePokemon newTipo) {
+	public @ResponseBody ResponseEntity<PokemonType> createNewTipoDePokemon(@RequestBody PokemonType newTipo) {
 		return pokedexService.createNewTipo(newTipo);
 	}
 	
 	@GetMapping(path="/tipos")
-	public @ResponseBody List<TipoDePokemon> getAllTiposDePokemon() {
+	public @ResponseBody List<PokemonType> getAllTiposDePokemon() {
 		return pokedexService.getAllTiposDePokemon();
 	}
 	
@@ -102,7 +102,7 @@ public class PokedexController {
 	}
 	
 	@GetMapping(path="/tipos/{id}")
-	public @ResponseBody TipoDePokemon getTipoDePokemonById(@PathVariable Integer id) {
+	public @ResponseBody PokemonType getTipoDePokemonById(@PathVariable Integer id) {
 		return pokedexService.getTipoDePokemonById(id);
 	}
 }

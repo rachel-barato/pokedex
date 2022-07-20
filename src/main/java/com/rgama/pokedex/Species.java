@@ -39,18 +39,18 @@ public class Species implements Serializable {
 	private List<Pokemon> pokemons;
 	
 	@ManyToMany
-	@JoinTable(name="tipos_de_especies",
+	@JoinTable(name="types_species",
 				joinColumns= @JoinColumn(name="id_species"),
-				inverseJoinColumns=@JoinColumn(name="id_tipo"))
+				inverseJoinColumns=@JoinColumn(name="id_type"))
 	@JsonManagedReference
-	private List<TipoDePokemon> tipos;
+	private List<PokemonType> pokemonTypes;
 
 	public Species() {
 	}
 
-	public Species(String name, List<TipoDePokemon> tipos) {
+	public Species(String name, List<PokemonType> pokemonTypes) {
 		this.name = name;
-		this.tipos = tipos;
+		this.pokemonTypes = pokemonTypes;
 	}
 
 	public Integer getId() {
@@ -69,11 +69,11 @@ public class Species implements Serializable {
 		this.name = name;
 	}
 
-	public List<TipoDePokemon> getTipos() {
-		return tipos;
+	public List<PokemonType> getPokemonTypes() {
+		return pokemonTypes;
 	}
 
-	public void setTipos(List<TipoDePokemon> tipos) {
-		this.tipos = tipos;
+	public void setPokemonTypes(List<PokemonType> pokemonTypes) {
+		this.pokemonTypes = pokemonTypes;
 	}
 }

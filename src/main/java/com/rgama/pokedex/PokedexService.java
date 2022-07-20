@@ -21,7 +21,7 @@ public class PokedexService {
 	private SkillRepository skillRepository;
 	
 	@Autowired
-	private TipoDePokemonRepository tipoDePokemonRepository;
+	private PokemonTypeRepository tipoDePokemonRepository;
 	
 	public ResponseEntity<Pokemon> createNewPokemon(Pokemon newPokemon) {
 		return  ResponseEntity.ok(pokemonRepository.save(newPokemon));
@@ -68,7 +68,7 @@ public class PokedexService {
 	}
 	
 	public Species getSpeciesByName(String name) {
-		Optional<Species> speciesFound = Optional.of(speciesRepository.findBySpecies(name));
+		Optional<Species> speciesFound = Optional.of(speciesRepository.findByName(name));
 		
 		return speciesFound.orElseThrow(() -> new EntityNotFoundException("species", name));
 	}
@@ -78,7 +78,7 @@ public class PokedexService {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
-	public ResponseEntity<TipoDePokemon> createNewTipo(TipoDePokemon newTipo) {
+	public ResponseEntity<PokemonType> createNewTipo(PokemonType newTipo) {
 		return ResponseEntity.ok(tipoDePokemonRepository.save(newTipo));
 	}
 	
@@ -87,11 +87,11 @@ public class PokedexService {
 		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
-	public List<TipoDePokemon> getAllTiposDePokemon() {
-		return tipoDePokemonRepository.findByOrderByTipoAsc();
+	public List<PokemonType> getAllTiposDePokemon() {
+		return tipoDePokemonRepository.findByOrderByNameAsc();
 	}
 	
-	public TipoDePokemon getTipoDePokemonById(Integer id) {
+	public PokemonType getTipoDePokemonById(Integer id) {
 		return tipoDePokemonRepository.findById(id)
 				.orElseThrow(() -> new EntityNotFoundException("tipo de pokemon", id));
 	}

@@ -16,8 +16,8 @@ import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
-@Table(name="tipo_de_pokemon")
-public class TipoDePokemon implements Serializable {
+@Table(name="pokemon_type")
+public class PokemonType implements Serializable {
 
 	private static final long serialVersionUID = -4280761226411858773L;
 
@@ -26,21 +26,21 @@ public class TipoDePokemon implements Serializable {
 	@Column(name="ID")
 	private Integer id;
 	
-	@Column(name="tipo")
-	private String tipo;
+	@Column(name="name")
+	private String name;
 	
-	@ManyToMany(mappedBy="tipos")
+	@ManyToMany(mappedBy="pokemonTypes")
 	@JsonIdentityInfo(
 			  generator = ObjectIdGenerators.PropertyGenerator.class, 
 			  property = "id")
 	@JsonBackReference
 	private List<Species> species;
 
-	public TipoDePokemon() {
+	public PokemonType() {
 	}
 
-	public TipoDePokemon(String tipo, List<Species> species) {
-		this.tipo = tipo;
+	public PokemonType(String name, List<Species> species) {
+		this.name = name;
 		this.species = species;
 	}
 
@@ -52,12 +52,12 @@ public class TipoDePokemon implements Serializable {
 		this.id = id;
 	}
 
-	public String getTipo() {
-		return tipo;
+	public String getName() {
+		return name;
 	}
 
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public List<Species> getSpecies() {
