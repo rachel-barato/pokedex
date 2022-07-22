@@ -47,6 +47,12 @@ public class Skill implements Serializable {
 	public Skill() {
 	}
 
+	public Skill(Skill newSkill) {
+		this.name = newSkill.getName();
+		this.effect = newSkill.getEffect();
+		this.pokemons = newSkill.getPokemons();
+	}
+
 	public Skill(String name, String effect, List<Pokemon> pokemons) {
 		this.name = name;
 		this.effect = effect;

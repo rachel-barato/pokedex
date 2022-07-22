@@ -39,6 +39,11 @@ public class PokemonType implements Serializable {
 	public PokemonType() {
 	}
 
+	public PokemonType(PokemonType newPokemonType) {
+		this.name = newPokemonType.getName();
+		this.species = newPokemonType.getSpecies();
+	}
+
 	public PokemonType(String name, List<Species> species) {
 		this.name = name;
 		this.species = species;

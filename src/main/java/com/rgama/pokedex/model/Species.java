@@ -48,6 +48,11 @@ public class Species implements Serializable {
 	public Species() {
 	}
 
+	public Species(Species newSpecies) {
+		this.name = newSpecies.getName();
+		this.pokemonTypes = newSpecies.getPokemonTypes();
+	}
+
 	public Species(String name, List<PokemonType> pokemonTypes) {
 		this.name = name;
 		this.pokemonTypes = pokemonTypes;
