@@ -13,34 +13,34 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rgama.pokedex.pokemon.Pokemon;
-import com.rgama.pokedex.pokemon.PokemonService;
+import com.rgama.pokedex.skill.Skill;
+import com.rgama.pokedex.skill.SkillService;
 
 @RestController
-@RequestMapping(path="/pokemons")
-public class PokemonController {
+@RequestMapping(path="/skills")
+public class SkillController {
 	
 	@Autowired
-	private PokemonService pokemonService;
+	private SkillService skillService;
 	
 	@PostMapping()
-	public ResponseEntity<Pokemon> createNewPokemon(@RequestBody Pokemon newPokemon) {
-		return ResponseEntity.ok(pokemonService.createNewPokemon(newPokemon));
+	public ResponseEntity<Skill> createNewSkill(@RequestBody Skill newSkill) {
+		return ResponseEntity.ok(skillService.createNewSkill(newSkill));
 	}
 	
 	@GetMapping()
-	public ResponseEntity<List<Pokemon>> getAllPokemons() {
-		return ResponseEntity.ok(pokemonService.getAllPokemons());
-	}	
+	public ResponseEntity<List<Skill>> getAllSkills() {
+		return ResponseEntity.ok(skillService.getAllSkills());
+	}
 	
 	@DeleteMapping(path="/{id}")
-	public ResponseEntity<String> deletePokemon(@PathVariable Integer id) {
-		pokemonService.deletePokemon(id);
+	public ResponseEntity<String> deleteSkill(@PathVariable Integer id) {
+		skillService.deleteSkill(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
 	@GetMapping(path="/{id}")
-	public ResponseEntity<Pokemon> getPokemonById(@PathVariable Integer id) {
-		return ResponseEntity.ok(pokemonService.getPokemonById(id));
+	public ResponseEntity<Skill> getSkillById(@PathVariable Integer id) {
+		return ResponseEntity.ok(skillService.getSkillById(id));
 	}
 }

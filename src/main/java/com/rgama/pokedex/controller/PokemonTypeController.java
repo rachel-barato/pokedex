@@ -13,34 +13,34 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rgama.pokedex.pokemon.Pokemon;
-import com.rgama.pokedex.pokemon.PokemonService;
+import com.rgama.pokedex.pokemonType.PokemonType;
+import com.rgama.pokedex.pokemonType.PokemonTypeService;
 
 @RestController
-@RequestMapping(path="/pokemons")
-public class PokemonController {
+@RequestMapping(path="/types")
+public class PokemonTypeController {
 	
 	@Autowired
-	private PokemonService pokemonService;
+	private PokemonTypeService pokemonTypeService;
 	
 	@PostMapping()
-	public ResponseEntity<Pokemon> createNewPokemon(@RequestBody Pokemon newPokemon) {
-		return ResponseEntity.ok(pokemonService.createNewPokemon(newPokemon));
+	public ResponseEntity<PokemonType> createNewPokemonType(@RequestBody PokemonType newType) {
+		return ResponseEntity.ok(pokemonTypeService.createNewPokemonType(newType));
 	}
 	
 	@GetMapping()
-	public ResponseEntity<List<Pokemon>> getAllPokemons() {
-		return ResponseEntity.ok(pokemonService.getAllPokemons());
-	}	
+	public ResponseEntity<List<PokemonType>> getAllPokemonTypes() {
+		return ResponseEntity.ok(pokemonTypeService.getAllPokemonTypes());
+	}
 	
 	@DeleteMapping(path="/{id}")
-	public ResponseEntity<String> deletePokemon(@PathVariable Integer id) {
-		pokemonService.deletePokemon(id);
+	public ResponseEntity<String> deletePokemonType(@PathVariable Integer id) {
+		pokemonTypeService.deletePokemonType(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
 	@GetMapping(path="/{id}")
-	public ResponseEntity<Pokemon> getPokemonById(@PathVariable Integer id) {
-		return ResponseEntity.ok(pokemonService.getPokemonById(id));
+	public ResponseEntity<PokemonType> getTipoDePokemonById(@PathVariable Integer id) {
+		return ResponseEntity.ok(pokemonTypeService.getTipoDePokemonById(id));
 	}
 }
