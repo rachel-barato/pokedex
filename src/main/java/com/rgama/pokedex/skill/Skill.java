@@ -1,4 +1,4 @@
-package com.rgama.pokedex;
+package com.rgama.pokedex.skill;
 
 import java.io.Serializable;
 import java.util.List;
@@ -16,6 +16,7 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.rgama.pokedex.pokemon.Pokemon;
 
 @Entity
 @Table(name="skill")

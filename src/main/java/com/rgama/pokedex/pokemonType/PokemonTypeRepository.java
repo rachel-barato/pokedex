@@ -1,4 +1,4 @@
-package com.rgama.pokedex;
+package com.rgama.pokedex.pokemonType;
 
 import java.util.List;
 import java.util.Optional;

@@ -1,4 +1,4 @@
-package com.rgama.pokedex;
+package com.rgama.pokedex.pokemon;
 
 import java.io.Serializable;
 import java.util.List;
@@ -16,6 +16,8 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.rgama.pokedex.skill.Skill;
+import com.rgama.pokedex.species.Species;
 
 @Entity
 @Table(name="pokemon")
@@ -60,8 +62,15 @@ public class Pokemon implements Serializable {
 	public Pokemon() {
 	}
 
-	public Pokemon(Species species) {
-		this.species = species;
+	public Pokemon(Pokemon newPokemon) {
+		this.species = newPokemon.getSpecies();
+		this.name = newPokemon.getName();
+		this.weight = newPokemon.getWeight();
+		this.age = newPokemon.getAge();
+		this.attack = newPokemon.getAttack();
+		this.defense = newPokemon.getDefense();
+		this.gender = newPokemon.getGender();
+		this.skills = newPokemon.getSkills();
 	}
 
 	public Pokemon(Species species, String name, Double weight, Integer age, Double attack, Double defense,

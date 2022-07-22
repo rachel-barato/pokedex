@@ -4,9 +4,17 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+
+import com.rgama.pokedex.exception.EntityNotFoundException;
+import com.rgama.pokedex.pokemon.Pokemon;
+import com.rgama.pokedex.pokemon.PokemonRepository;
+import com.rgama.pokedex.pokemonType.PokemonType;
+import com.rgama.pokedex.pokemonType.PokemonTypeRepository;
+import com.rgama.pokedex.skill.Skill;
+import com.rgama.pokedex.skill.SkillRepository;
+import com.rgama.pokedex.species.Species;
+import com.rgama.pokedex.species.SpeciesRepository;
 
 @Service
 public class PokedexService {
@@ -21,10 +29,10 @@ public class PokedexService {
 	private SkillRepository skillRepository;
 	
 	@Autowired
-	private PokemonTypeRepository tipoDePokemonRepository;
+	private PokemonTypeRepository pokemonTypeRepository;
 	
-	public ResponseEntity<Pokemon> createNewPokemon(Pokemon newPokemon) {
-		return  ResponseEntity.ok(pokemonRepository.save(newPokemon));
+	public Pokemon createNewPokemon(Pokemon newPokemon) {
+		return  pokemonRepository.save(newPokemon);
 	}
 	
 	public List<Pokemon> getAllPokemons() {
@@ -36,18 +44,25 @@ public class PokedexService {
 				.orElseThrow(() -> new EntityNotFoundException("pokemon", id));
 	}
 	
-	public ResponseEntity<String> deletePokemon(Integer id) {
+	public void deletePokemon(Integer id) {
 		pokemonRepository.deleteById(id);
-		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
-	public ResponseEntity<Skill> createNewSkill(Skill newSkill) {
-		return ResponseEntity.ok(skillRepository.save(newSkill));
+	public Pokemon replacePokemon(Pokemon newPokemon, Integer id) {
+		return pokemonRepository.findById(id)
+			.map(pokemon -> {
+				pokemon = new Pokemon(newPokemon);
+				return pokemonRepository.save(pokemon);
+			})
+			.orElseThrow(() -> new EntityNotFoundException("pokemon", id));
 	}
 	
-	public ResponseEntity<String> deleteSkill(Integer id) {
+	public Skill createNewSkill(Skill newSkill) {
+		return skillRepository.save(newSkill);
+	}
+	
+	public void deleteSkill(Integer id) {
 		skillRepository.deleteById(id);
-		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
 	public List<Skill> getAllSkills() {
@@ -59,8 +74,8 @@ public class PokedexService {
 				.orElseThrow(() -> new EntityNotFoundException("skill", id));
 	}	
 	
-	public ResponseEntity<Species> createNewSpecies(Species newSpecies) {
-		return ResponseEntity.ok(speciesRepository.save(newSpecies));
+	public Species createNewSpecies(Species newSpecies) {
+		return speciesRepository.save(newSpecies);
 	}
 	
 	public List<Species> getAllSpecies() {
@@ -68,31 +83,29 @@ public class PokedexService {
 	}
 	
 	public Species getSpeciesByName(String name) {
-		Optional<Species> speciesFound = Optional.of(speciesRepository.findByName(name));
 		
-		return speciesFound.orElseThrow(() -> new EntityNotFoundException("species", name));
+		return Optional.of(speciesRepository.findByName(name))
+				.orElseThrow(() -> new EntityNotFoundException("species", name));
 	}
 	
-	public ResponseEntity<String> deleteSpecies(Integer id) {
+	public void deleteSpecies(Integer id) {
 		speciesRepository.deleteById(id);
-		return new ResponseEntity<>(HttpStatus.OK);
 	}
 	
-	public ResponseEntity<PokemonType> createNewPokemonType(PokemonType newType) {
-		return ResponseEntity.ok(tipoDePokemonRepository.save(newType));
+	public PokemonType createNewPokemonType(PokemonType newType) {
+		return pokemonTypeRepository.save(newType);
 	}
 	
-	public ResponseEntity<String> deletePokemonType(Integer id) {
-		tipoDePokemonRepository.deleteById(id);
-		return new ResponseEntity<>(HttpStatus.OK);
+	public void deletePokemonType(Integer id) {
+		pokemonTypeRepository.deleteById(id);
 	}
 	
 	public List<PokemonType> getAllPokemonTypes() {
-		return tipoDePokemonRepository.findByOrderByNameAsc();
+		return pokemonTypeRepository.findByOrderByNameAsc();
 	}
 	
 	public PokemonType getTipoDePokemonById(Integer id) {
-		return tipoDePokemonRepository.findById(id)
+		return pokemonTypeRepository.findById(id)
 				.orElseThrow(() -> new EntityNotFoundException("tipo de pokemon", id));
 	}
 }
