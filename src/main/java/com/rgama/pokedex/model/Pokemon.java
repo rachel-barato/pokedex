@@ -1,4 +1,4 @@
-package com.rgama.pokedex.pokemon;
+package com.rgama.pokedex.model;
 
 import java.io.Serializable;
 import java.util.List;
@@ -16,8 +16,6 @@ import javax.persistence.Table;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import com.rgama.pokedex.skill.Skill;
-import com.rgama.pokedex.species.Species;
 
 @Entity
 @Table(name="pokemon")

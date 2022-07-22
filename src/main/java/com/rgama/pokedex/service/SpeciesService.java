@@ -1,4 +1,4 @@
-package com.rgama.pokedex.species;
+package com.rgama.pokedex.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rgama.pokedex.exception.PokedexEntityNotFoundException;
+import com.rgama.pokedex.model.Species;
+import com.rgama.pokedex.repository.SpeciesRepository;
 
 @Service
 public class SpeciesService {

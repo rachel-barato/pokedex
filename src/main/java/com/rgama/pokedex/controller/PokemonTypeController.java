@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rgama.pokedex.pokemonType.PokemonType;
-import com.rgama.pokedex.pokemonType.PokemonTypeService;
+import com.rgama.pokedex.model.PokemonType;
+import com.rgama.pokedex.service.PokemonTypeService;
 
 @RestController
 @RequestMapping(path="/types")

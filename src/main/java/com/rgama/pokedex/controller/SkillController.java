@@ -13,8 +13,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rgama.pokedex.skill.Skill;
-import com.rgama.pokedex.skill.SkillService;
+import com.rgama.pokedex.model.Skill;
+import com.rgama.pokedex.service.SkillService;
 
 @RestController
 @RequestMapping(path="/skills")

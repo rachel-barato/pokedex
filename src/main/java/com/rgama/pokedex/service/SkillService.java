@@ -1,4 +1,4 @@
-package com.rgama.pokedex.skill;
+package com.rgama.pokedex.service;
 
 import java.util.List;
 
@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.rgama.pokedex.exception.PokedexEntityNotFoundException;
+import com.rgama.pokedex.model.Skill;
+import com.rgama.pokedex.repository.SkillRepository;
 
 @Service
 public class SkillService {	
