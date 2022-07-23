@@ -31,4 +31,13 @@ public class PokemonTypeService {
 		return pokemonTypeRepository.findById(id)
 				.orElseThrow(() -> new PokedexEntityNotFoundException("tipo de pokemon", id));
 	}
+	
+	public PokemonType replacePokemonType(PokemonType newPokemonType, Integer id) {
+		return pokemonTypeRepository.findById(id)
+				.map(pokemonType -> {
+					pokemonType = new PokemonType(newPokemonType);
+					return pokemonTypeRepository.save(pokemonType);
+				})
+				.orElseThrow(() -> new PokedexEntityNotFoundException("pokemon type", id));
+	}
 }

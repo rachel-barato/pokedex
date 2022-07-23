@@ -31,4 +31,13 @@ public class SkillService {
 		return skillRepository.findById(id)
 				.orElseThrow(() -> new PokedexEntityNotFoundException("skill", id));
 	}	
+	
+	public Skill replaceSkill(Skill newSkill, Integer id) {
+		return skillRepository.findById(id)
+				.map(skill -> {
+					skill = new Skill(newSkill);
+					return skillRepository.save(skill);
+				})
+				.orElseThrow(() -> new PokedexEntityNotFoundException("skill", id));
+	}
 }

@@ -19,6 +19,10 @@ public class PokemonService {
 		return  pokemonRepository.save(newPokemon);
 	}
 	
+	public void deletePokemon(Integer id) {
+		pokemonRepository.deleteById(id);
+	}
+	
 	public List<Pokemon> getAllPokemons() {
 		return pokemonRepository.findAll();
 	}
@@ -28,16 +32,12 @@ public class PokemonService {
 				.orElseThrow(() -> new PokedexEntityNotFoundException("pokemon", id));
 	}
 	
-	public void deletePokemon(Integer id) {
-		pokemonRepository.deleteById(id);
-	}
-	
 	public Pokemon replacePokemon(Pokemon newPokemon, Integer id) {
 		return pokemonRepository.findById(id)
-			.map(pokemon -> {
-				pokemon = new Pokemon(newPokemon);
-				return pokemonRepository.save(pokemon);
-			})
-			.orElseThrow(() -> new PokedexEntityNotFoundException("pokemon", id));
+				.map(pokemon -> {
+					pokemon = new Pokemon(newPokemon);
+					return pokemonRepository.save(pokemon);
+				})
+				.orElseThrow(() -> new PokedexEntityNotFoundException("pokemon", id));
 	}
 }

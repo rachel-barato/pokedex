@@ -20,17 +20,25 @@ public class SpeciesService {
 		return speciesRepository.save(newSpecies);
 	}
 	
+	public void deleteSpecies(Integer id) {
+		speciesRepository.deleteById(id);
+	}
+	
 	public List<Species> getAllSpecies() {
 		return speciesRepository.findByOrderByNameAsc();
 	}
 	
 	public Species getSpeciesByName(String name) {
-		
 		return Optional.of(speciesRepository.findByName(name))
 				.orElseThrow(() -> new PokedexEntityNotFoundException("species", name));
 	}
 	
-	public void deleteSpecies(Integer id) {
-		speciesRepository.deleteById(id);
+	public Species replaceSpecies(Species newSpecies, Integer id) {
+		return speciesRepository.findById(id)
+				.map(species -> {
+					species = new Species(newSpecies);
+					return speciesRepository.save(newSpecies);
+				})
+				.orElseThrow(() -> new PokedexEntityNotFoundException("species", id));
 	}
 }
