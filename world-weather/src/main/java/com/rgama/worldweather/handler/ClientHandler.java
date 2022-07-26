@@ -11,7 +11,7 @@ public class ClientHandler {
 	public String retrieveWeatherData(String city) {
 		String convertedCity = city.replaceAll(" ", "%20");
 		
-		var request = HttpRequest
+		HttpRequest request = HttpRequest
 				.newBuilder(
 					URI.create(
 						"https://api.openweathermap.org/data/2.5/weather?q=" 
