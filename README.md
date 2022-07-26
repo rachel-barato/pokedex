@@ -14,7 +14,7 @@ User will be able to:
 
 ### Rules for retrieving the pokémons weather based
 
-- cities where the temperature is:
+- Cities where the temperature is:
     - Less then **(<) 5ºC**, will retrieve **ice** pokémons;
     - Between **(>=) 5ºC and (<) 10ºC** will retrieve **water** pokémons;
     - Between **(>=) 12ºC and (<) 15ºC** will retrieve **grass** pokémons;
@@ -25,7 +25,7 @@ User will be able to:
     - **To any other temperature**, **normal** pokémons should be retrieved;
     - If it is **raining**, **eletric** pokémons will be retrieved, no matter the temperature.
 
-> These rules are based oh the following challenge: *[Desafio Pokémon para Desenvolvedores](https://gitlab.com/enviabybus/weather-pokemon-test/-/tree/master/developer)*
+> These rules are based on the following challenge: *[Desafio Pokémon para Desenvolvedores](https://gitlab.com/enviabybus/weather-pokemon-test/-/tree/master/developer)*
 
 _______________________________________________________
 
