@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rgama.pokedex.model.CityPokemons;
 import com.rgama.pokedex.model.Pokemon;
 import com.rgama.pokedex.service.PokemonService;
 
@@ -43,6 +44,16 @@ public class PokemonController {
 	@GetMapping(path="/{id}")
 	public ResponseEntity<Pokemon> getPokemonById(@PathVariable Integer id) {
 		return ResponseEntity.ok(pokemonService.getPokemonById(id));
+	}
+	
+	@GetMapping(path="/city/{city}")
+	public ResponseEntity<CityPokemons> getPokemonListbyWeather(@PathVariable String city){
+		return ResponseEntity.ok(pokemonService.getPokemonListbyWeather(city));
+	}
+	
+	@GetMapping(path="/type/{typeName}")
+	public ResponseEntity<List<Pokemon>> getPokemonByType(@PathVariable String typeName) {
+		return ResponseEntity.ok(pokemonService.getPokemonByPokemonType(typeName));
 	}
 	
 	@PutMapping(path="/{id}")
