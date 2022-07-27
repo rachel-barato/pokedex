@@ -6,25 +6,26 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse.BodyHandlers;
 
+import org.springframework.web.util.UriComponentsBuilder;
+
 public class ClientHandler {
 	
 	public String retrieveWeatherData(String city) {
-		String convertedCity = city.replaceAll(" ", "%20");
 		
-		HttpRequest request = HttpRequest
-				.newBuilder(
-					URI.create(
-						"https://api.openweathermap.org/data/2.5/weather?q=" 
-						+ convertedCity + 
-						"&appid=5c5027876d78844b3a8ae65329c66296&units=metric&lang=pt_br"
-					)
-				)
-				.GET()
-				.build();
+		URI uri = UriComponentsBuilder
+				.fromUriString("https://api.openweathermap.org/data/2.5/weather")
+				.queryParam("q", city)
+				.queryParam("appid", "5c5027876d78844b3a8ae65329c66296")
+				.queryParam("units","metric")
+				.queryParam("lang","pt_br")
+				.build().toUri();
 		
 		try {
 			var client = HttpClient.newHttpClient();
-			return client.send(request, BodyHandlers.ofString()).body();
+			return client.send(
+					HttpRequest.newBuilder(uri).GET().build(), 
+					BodyHandlers.ofString()
+				).body();
 			
 		} catch (IOException | InterruptedException ex) {
 			throw new RuntimeException(ex);
