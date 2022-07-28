@@ -13,11 +13,13 @@ public class WeatherExtractor {
 		ObjectMapper objectMapper = new ObjectMapper();
 		Weather weather = new Weather();
 		
+		JsonPointer cityNamePointer = JsonPointer.compile("/name");
 		JsonPointer climatePointer = JsonPointer.compile("/weather/0/main");
 		JsonPointer temperaturePointer = JsonPointer.compile("/main/temp");
 		
 		try {
 			JsonNode jsonData = objectMapper.readTree(json);
+			weather.setCityName(jsonData.at(cityNamePointer).asText());
 			weather.setClimate(jsonData.at(climatePointer).asText());
 			weather.setTemperature(jsonData.at(temperaturePointer).asDouble());
 			

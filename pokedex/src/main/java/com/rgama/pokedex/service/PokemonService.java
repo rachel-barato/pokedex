@@ -46,7 +46,7 @@ public class PokemonService {
 						getPokemonTypeByWeather(currentWeather).toString()
 				);
 		
-		return new CityPokemons(city, currentWeather, pokemonList);
+		return new CityPokemons(currentWeather, pokemonList);
 	}
 	
 	private PokemonType getPokemonTypeByWeather(Weather currentWeather) {
