@@ -1,0 +1,44 @@
+version: '3.8'
+
+services:
+  mysql:
+    image: mysql:8
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: pokedex
+      MYSQL_USER: root
+      MYSQL_ROOT_PASSWORD: admin
+    networks:
+      - mysql-compose-network
+  pokedex:
+    container_name: pokedex
+    build:
+      context: ./pokedex
+    expose:
+      - 8080
+    ports:
+      - 8080:8080
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/pokedex
+    depends_on:
+      - mysql
+    networks:
+      - mysql-compose-network
+  world-weather:
+    container_name: world-weather
+    build:
+      context: ./world-weather
+    expose:
+      - 8081
+    ports:
+      - 8081:8081
+    env_file:
+      - ./world-weather/.env
+  adminer:
+    image: adminer
+    ports:
+      - 8090:8090
+
+networks: 
+  mysql-compose-network:
+    driver: bridge
