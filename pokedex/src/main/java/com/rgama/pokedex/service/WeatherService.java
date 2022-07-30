@@ -5,12 +5,12 @@ import org.springframework.stereotype.Service;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.rgama.pokedex.model.Weather;
-import com.rgama.pokedex.weather.handler.WeatherHandler;
+import com.rgama.pokedex.weather.client.WeatherClient;
 
 @Service
 public class WeatherService {
 	
-	WeatherHandler weatherHandler = new WeatherHandler();
+	WeatherClient weatherHandler = new WeatherClient();
 
 	public Weather getWeatherByCity(String city) {
 		

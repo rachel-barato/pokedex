@@ -5,15 +5,15 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.rgama.worldweather.client.OpenWeatherClient;
 import com.rgama.worldweather.extractor.WeatherExtractor;
-import com.rgama.worldweather.handler.ClientHandler;
 import com.rgama.worldweather.model.Weather;
 
 @RestController
 @RequestMapping(path="/weather")
 public class WeatherController {
 	
-	private ClientHandler clientHandler = new ClientHandler();
+	private OpenWeatherClient clientHandler = new OpenWeatherClient();
 	
 	private WeatherExtractor weatherExtractor = new WeatherExtractor();
 	

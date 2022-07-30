@@ -1,4 +1,4 @@
-package com.rgama.pokedex.weather.handler;
+package com.rgama.pokedex.weather.client;
 
 import java.io.IOException;
 import java.net.URI;
@@ -8,7 +8,7 @@ import java.net.http.HttpResponse.BodyHandlers;
 
 import org.springframework.web.util.UriComponentsBuilder;
 
-public class WeatherHandler {
+public class WeatherClient {
 	
 	public String getWeatherOnCity(String city) {
 		
