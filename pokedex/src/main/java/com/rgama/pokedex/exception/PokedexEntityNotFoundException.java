@@ -1,6 +1,10 @@
 package com.rgama.pokedex.exception;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.ResponseStatus;
+
 @SuppressWarnings("serial")
+@ResponseStatus(value = HttpStatus.NOT_FOUND)
 public class PokedexEntityNotFoundException extends RuntimeException {
 	
 	public PokedexEntityNotFoundException(String tipeOfEntity, Integer id) {
