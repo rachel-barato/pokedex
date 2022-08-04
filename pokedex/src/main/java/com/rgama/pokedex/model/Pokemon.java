@@ -13,9 +13,9 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name="pokemon")
@@ -29,10 +29,7 @@ public class Pokemon implements Serializable {
 	private Integer id;
 	
 	@ManyToOne
-	@JoinColumn(name="id_species", nullable=false)
-	@JsonIdentityInfo(
-			  generator = ObjectIdGenerators.PropertyGenerator.class, 
-			  property = "id")
+	@JoinColumn(name="id_species", referencedColumnName="id" , nullable=false)
 	private Species species;
 	
 	@Column(name="name")
@@ -54,25 +51,35 @@ public class Pokemon implements Serializable {
 	private String gender;
 	
 	@ManyToMany(mappedBy="pokemons")
-	@JsonManagedReference
+	@JsonManagedReference(value="pokemon-skills")
 	private List<Skill> skills;
 
+	@JsonCreator
 	public Pokemon() {
 	}
 
 	public Pokemon(Pokemon newPokemon) {
-		this.species = newPokemon.getSpecies();
-		this.name = newPokemon.getName();
-		this.weight = newPokemon.getWeight();
-		this.age = newPokemon.getAge();
-		this.attack = newPokemon.getAttack();
-		this.defense = newPokemon.getDefense();
-		this.gender = newPokemon.getGender();
-		this.skills = newPokemon.getSkills();
+		new Pokemon(
+				newPokemon.getSpecies(),
+				newPokemon.getName(),
+				newPokemon.getWeight(),
+				newPokemon.getAge(),
+				newPokemon.getAttack(),
+				newPokemon.getDefense(),
+				newPokemon.getGender(),
+				newPokemon.getSkills()
+				);
 	}
-
-	public Pokemon(Species species, String name, Double weight, Integer age, Double attack, Double defense,
-			String gender, List<Skill> skills) {
+	
+	public Pokemon(
+			@JsonProperty("species") Species species, 
+			@JsonProperty("name") String name, 
+			@JsonProperty("weight") Double weight, 
+			@JsonProperty("age") Integer age, 
+			@JsonProperty("attack") Double attack, 
+			@JsonProperty("defense") Double defense,
+			@JsonProperty("gender") String gender, 
+			@JsonProperty("skills") List<Skill> skills) {
 		this.species = species;
 		this.name = name;
 		this.weight = weight;

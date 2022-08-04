@@ -12,8 +12,6 @@ import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 @Entity
 @Table(name="pokemon_type")
@@ -30,10 +28,7 @@ public class PokemonType implements Serializable {
 	private String name;
 	
 	@ManyToMany(mappedBy="pokemonTypes")
-	@JsonIdentityInfo(
-			  generator = ObjectIdGenerators.PropertyGenerator.class, 
-			  property = "id")
-	@JsonBackReference
+	@JsonBackReference(value="type-species")
 	private List<Species> species;
 
 	public PokemonType() {

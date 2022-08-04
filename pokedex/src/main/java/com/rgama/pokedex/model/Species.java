@@ -14,9 +14,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 @Entity
 @Table(name="species")
@@ -33,17 +31,20 @@ public class Species implements Serializable {
 	private String name;
 	
 	@OneToMany(mappedBy="species")
-	@JsonIdentityInfo(
-			  generator = ObjectIdGenerators.PropertyGenerator.class, 
-			  property = "id")
+	@JsonBackReference(value="species-pokemons")
 	private List<Pokemon> pokemons;
 	
 	@ManyToMany
 	@JoinTable(name="types_species",
 				joinColumns= @JoinColumn(name="id_species"),
 				inverseJoinColumns=@JoinColumn(name="id_type"))
-	@JsonManagedReference
 	private List<PokemonType> pokemonTypes;
+
+	@ManyToMany
+	@JoinTable(name="species_skills",
+				joinColumns= @JoinColumn(name="id_specie"),
+				inverseJoinColumns=@JoinColumn(name="id_skill"))
+	private List<Skill> specieSkills;
 
 	public Species() {
 	}
@@ -80,5 +81,13 @@ public class Species implements Serializable {
 
 	public void setPokemonTypes(List<PokemonType> pokemonTypes) {
 		this.pokemonTypes = pokemonTypes;
+	}
+	
+	public List<Skill> getSpecieSkills() {
+		return specieSkills;
+	}
+
+	public void setSpecieSkills(List<Skill> specieSkills) {
+		this.specieSkills = specieSkills;
 	}
 }
