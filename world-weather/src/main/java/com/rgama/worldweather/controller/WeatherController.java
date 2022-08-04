@@ -1,5 +1,6 @@
 package com.rgama.worldweather.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -13,7 +14,8 @@ import com.rgama.worldweather.model.Weather;
 @RequestMapping(path="/weather")
 public class WeatherController {
 	
-	private OpenWeatherClient clientHandler = new OpenWeatherClient();
+	@Autowired
+	private OpenWeatherClient clientHandler;
 	
 	private WeatherExtractor weatherExtractor = new WeatherExtractor();
 	

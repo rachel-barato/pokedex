@@ -6,14 +6,22 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse.BodyHandlers;
 
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.PropertySource;
+import org.springframework.stereotype.Component;
 import org.springframework.web.util.UriComponentsBuilder;
 
+@Component
+@PropertySource("classpath:application.properties")
 public class OpenWeatherClient {
+	
+	@Value("${weather.url}")
+	private String url;
 	
 	public String retrieveWeatherData(String city) {
 		
 		URI uri = UriComponentsBuilder
-				.fromUriString("https://api.openweathermap.org/data/2.5/weather")
+				.fromUriString(url)
 				.queryParam("q", city)
 				.queryParam("appid", System.getenv().get("apiId").toString())
 				.queryParam("units","metric")
