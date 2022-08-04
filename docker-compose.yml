@@ -1,15 +1,25 @@
-version: '3.8'
+version: "3"
 
 services:
   mysql:
     image: mysql:8
     restart: unless-stopped
+    volumes:
+      - ./pokedex/data:/docker-entrypoint-initdb.d/
     environment:
       MYSQL_DATABASE: pokedex
-      MYSQL_USER: root
+      MYSQL_HOST: 172.17.0.1
       MYSQL_ROOT_PASSWORD: admin
     networks:
       - mysql-compose-network
+
+  adminer:
+    image: adminer
+    ports:
+      - 8090:8080
+    networks:
+      - mysql-compose-network
+
   pokedex:
     container_name: pokedex
     build:
@@ -24,6 +34,8 @@ services:
       - mysql
     networks:
       - mysql-compose-network
+    restart: unless-stopped
+      
   world-weather:
     container_name: world-weather
     build:
@@ -34,10 +46,6 @@ services:
       - 8081:8081
     env_file:
       - ./world-weather/.env
-  adminer:
-    image: adminer
-    ports:
-      - 8090:8090
 
 networks: 
   mysql-compose-network:
