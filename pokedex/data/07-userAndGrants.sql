@@ -1,0 +1,3 @@
+CREATE USER 'pokedex'@'%' IDENTIFIED BY 'pokedex';
+GRANT ALL PRIVILEGES ON * . * TO 'pokedex'@'%';
+FLUSH PRIVILEGES;
